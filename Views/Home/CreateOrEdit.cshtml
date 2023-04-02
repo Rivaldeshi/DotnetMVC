@@ -11,6 +11,7 @@
     </div>
 
     <form method="post">
+        <input type="hidden" asp-for="@Model.User.Id"/>
         <div class="form-group">
             <label for="Name" class="">Nom</label>
             <input asp-for="@Model.User.Name" id="userName" type="text" class="form-control" id="Nmae"
@@ -18,6 +19,7 @@
            <span class="text-danger "> @Html.ValidationMessageFor( model => model.User.Name) </span>
            <ul class="list-unstyled" id="suggestedList"></ul>
         </div>
+
         <div cl ass="form-group">
             <label for="SurName">Prenom</label>
             <input asp-for="@Model.User.SurName" type="text" class="form-control" id="SurName" placeholder="Prenom">

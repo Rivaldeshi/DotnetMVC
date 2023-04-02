@@ -33,17 +33,36 @@ namespace TestAplication.Controllers
             return View(view);
         }
 
-        public IActionResult Create()
+        public IActionResult CreateOrEdit(string id)
         {
-            return View();
+            AddViewModel viewModel = new AddViewModel();
+
+            if (!string.IsNullOrEmpty(id))
+            {
+                User? user = _userContext.Users.Find(Guid.Parse(id));
+                viewModel.User = user;
+            }
+
+            return View(viewModel);
         }
 
         [HttpPost]
-        public IActionResult Create(User user)
+        public IActionResult CreateOrEdit(User user)
         {
             if (ModelState.IsValid)
             {
-                _userContext.Users.Add(user);
+                if (user.Id != null && user.Id != default(Guid))
+                {
+                    User newuser = new User() { Id = user.Id };
+                    _userContext.Users.Attach(newuser);
+                    newuser.Name = user.Name;
+                    newuser.SurName = user.SurName;
+                }
+                else
+                {
+                    _userContext.Users.Add(user);
+                }
+
                 _userContext.SaveChanges();
 
                 return RedirectToAction("Index", "Home");
