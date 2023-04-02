@@ -1,0 +1,33 @@
+﻿@using TestAplication.Utils;
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <div class="d-flex justify-content-between align-items-center">
+        <h1 class="display-4">Welcome</h1>
+        <a href="/Home/Create" class="btn btn-primary text-white cursor-pointer" role="button">Add Users </a>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Nom</th>
+                <th scope="col">Prenom</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in @Model.Users)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.SurName</td>
+                    <td>
+                        <a asp-route-id="@item.Id" asp-controller="Home" asp-action="DeleteUser" class="btn btn-danger">Delete</a>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,31 @@
+@model TestAplication.Models.ViewModels.AddViewModel;
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="">
+    <div class="d-flex justify-content-between align-items-center">
+        <h1 class="display-4">Welcome</h1>
+        <a href="/Home" class="btn btn-primary text-white cursor-pointer" role="button">Back </a>
+    </div>
+
+    <form method="post">
+        <div class="form-group">
+            <label for="Name" class="">Nom</label>
+            <input asp-for="@Model.User.Name" id="userName" type="text" class="form-control" id="Nmae"
+                aria-describedby="emailHelp" placeholder="Enter Nom">
+           <span class="text-danger "> @Html.ValidationMessageFor( model => model.User.Name) </span>
+           <ul class="list-unstyled" id="suggestedList"></ul>
+        </div>
+        <div cl ass="form-group">
+            <label for="SurName">Prenom</label>
+            <input asp-for="@Model.User.SurName" type="text" class="form-control" id="SurName" placeholder="Prenom">
+            <span class="text-danger"> @Html.ValidationMessageFor( model => model.User.SurName) </span>
+        </div>
+        <div class="my-3 d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+
+</div>
